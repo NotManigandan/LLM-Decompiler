@@ -309,5 +309,12 @@
     "type": "O0",
     "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int A[2][2] = {{1, 2}, {3, 4}}, B[2][2] = {{5, 6}, {7, 8}}, C[2][2] = {0};\n    for (int i = 0; i < 2; i++) {\n        for (int j = 0; j < 2; j++) {\n            for (int k = 0; k < 2; k++) {\n                C[i][j] += A[i][k] * B[k][j];\n            }\n        }\n    }\n    printf(\"Product Matrix:\\n\");\n    for (int i = 0; i < 2; i++) {\n        for (int j = 0; j < 2; j++) {\n            printf(\"%d \", C[i][j]);\n        }\n        printf(\"\\n\");\n    }\n}",
     "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    assert(strstr(buffer, \"Product Matrix:\\n19 22 \\n43 50 \\n\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+},
+{
+    "task_id": 51,
+    "type": "O0",
+    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int A[2][2] = {{1, 2}, {3, 4}}, T[2][2];\n    for (int i = 0; i < 2; i++) {\n        for (int j = 0; j < 2; j++) {\n            T[j][i] = A[i][j];\n        }\n    }\n    printf(\"Transpose Matrix:\\n\");\n    for (int i = 0; i < 2; i++) {\n        for (int j = 0; j < 2; j++) {\n            printf(\"%d \", T[i][j]);\n        }\n        printf(\"\\n\");\n    }\n}",
+    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    assert(strstr(buffer, \"Transpose Matrix:\\n1 3 \\n2 4 \\n\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
 }
+
 ]
