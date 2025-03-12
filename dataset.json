@@ -3,6 +3,62 @@
     "type": "O0",
     "c_func": "#include <stdio.h>\n\nvoid func0(int *a, int *b) {\n    int temp = *a;\n    *a = *b;\n    *b = temp;\n}",
     "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0(int *a, int *b);\n\nint main(){\n    int x = 5, y = 10;\n    func0(&x, &y);\n    assert(x == 10 && y == 5);\n\n    x = -1, y = 100;\n    func0(&x, &y);\n    assert(x == 100 && y == -1);\n\n    x = 0, y = 0;\n    func0(&x, &y);\n    assert(x == 0 && y == 0);\n\n    x = 2147483647, y = -2147483648;\n    func0(&x, &y);\n    assert(x == -2147483648 && y == 2147483647);\n\n    printf(\"All test cases passed!\\n\");\n    return 0;\n}",
-    "input_asm_prompt": ""
+},
+{
+    "task_id": 2,
+    "type": "O0",
+    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int arr1[5][5] = { { 0, 1, 2, 3, 4 },\n                        { 2, 3, 4, 5, 6 },\n                        { 4, 5, 6, 7, 8 },\n                        { 5, 4, 3, 2, 6 },\n                        { 2, 5, 4, 3, 1 } };\n    int* arr2[5][5];\n\n    for (int i = 0; i < 5; i++) {\n        for (int j = 0; j < 5; j++) {\n            arr2[i][j] = &arr1[i][j];\n        }\n    }\n\n    printf(\"The values are\\n\");\n    for (int i = 0; i < 5; i++) {\n        for (int j = 0; j < 5; j++) {\n            printf(\"%d \", *arr2[i][j]);\n        }\n        printf(\"\\n\");\n    }\n}",
+    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    func0();\n    printf(\"Function executed successfully.\\n\");\n    return 0;\n}"
+},
+{
+    "task_id": 3,
+    "type": "O0",
+    "c_func": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nstruct Student {\n    char* name;\n    int roll_number;\n    int age;\n    double total_marks;\n};\n\nvoid func0() {\n    struct Student students[5];\n    int n = sizeof(students) / sizeof(struct Student);\n\n    students[0].roll_number = 1;\n    students[0].name = \"Geeks1\";\n    students[0].age = 12;\n    students[0].total_marks = 78.50;\n\n    students[1].roll_number = 5;\n    students[1].name = \"Geeks5\";\n    students[1].age = 10;\n    students[1].total_marks = 56.84;\n\n    students[2].roll_number = 2;\n    students[2].name = \"Geeks2\";\n    students[2].age = 11;\n    students[2].total_marks = 87.94;\n\n    students[3].roll_number = 4;\n    students[3].name = \"Geeks4\";\n    students[3].age = 12;\n    students[3].total_marks = 89.78;\n\n    students[4].roll_number = 3;\n    students[4].name = \"Geeks3\";\n    students[4].age = 13;\n    students[4].total_marks = 78.55;\n\n    printf(\"========================================\\n\");\n    printf(\"           Student Records              \\n\");\n    printf(\"========================================\\n\");\n    \n    for (int i = 0; i < n; i++) {\n        printf(\"\\nStudent %d:\\n\", i + 1);\n        printf(\"  Name        : %s\\n\", students[i].name);\n        printf(\"  Roll Number : %d\\n\", students[i].roll_number);\n        printf(\"  Age         : %d\\n\", students[i].age);\n        printf(\"  Total Marks : %.2f\\n\", students[i].total_marks);\n    }\n    \n    printf(\"========================================\\n\");\n}",
+    "c_test": "#include <stdio.h>\n\nvoid func0();\n\nint main() {\n    func0();\n    printf(\"Function executed successfully.\\n\");\n    return 0;\n}"
+},
+{
+    "task_id": 4,
+    "type": "O0",
+    "c_func": "#include <stdio.h>\n#include <stdlib.h>\n\nvoid func0() {\n    FILE *fptr1, *fptr2;\n    char filename[100];\n    int c;\n\n    printf(\"Enter the filename to open for reading: \");\n    scanf(\"%s\", filename);\n\n    fptr1 = fopen(filename, \"r\");\n    if (fptr1 == NULL) {\n        printf(\"Cannot open file %s\\n\", filename);\n        exit(1);\n    }\n\n    printf(\"Enter the filename to open for writing: \");\n    scanf(\"%s\", filename);\n\n    fptr2 = fopen(filename, \"w\");\n    if (fptr2 == NULL) {\n        printf(\"Cannot open file %s\\n\", filename);\n        exit(1);\n    }\n\n    while ((c = fgetc(fptr1)) != EOF) {\n        fputc(c, fptr2);\n    }\n\n    printf(\"Contents copied to %s\\n\", filename);\n\n    fclose(fptr1);\n    fclose(fptr2);\n}",
+    "c_test": "#include <stdio.h>\n#include <stdlib.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    FILE *testFile = fopen(\"test_input.txt\", \"w\");\n    fprintf(testFile, \"Hello, World!\\n\");\n    fclose(testFile);\n\n    freopen(\"test_input.txt\", \"r\", stdin);\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n\n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strcmp(buffer, \"Hello, World!\\n\") == 0);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+},
+{
+    "task_id": 5,
+    "type": "O0",
+    "c_func": "#include <math.h>\n#include <stdio.h>\n#include <string.h>\n\nvoid func0() {\n    char hexdecnumber[32] = \"2D\";\n    int decimalnumber, i;\n    int cnt;\n    int digit;\n\n    cnt = 0;\n    decimalnumber = 0;\n    \n    for (i = (strlen(hexdecnumber) - 1); i >= 0; i--) {\n        switch (hexdecnumber[i]) {\n        case 'A': digit = 10; break;\n        case 'B': digit = 11; break;\n        case 'C': digit = 12; break;\n        case 'D': digit = 13; break;\n        case 'E': digit = 14; break;\n        case 'F': digit = 15; break;\n        default: digit = hexdecnumber[i] - 0x30;\n        }\n        \n        decimalnumber = decimalnumber + (digit) * pow((double)16, (double)cnt);\n        cnt++;\n    }\n    printf(\"Decimal number is: %d\", decimalnumber);\n}",
+    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Decimal number is: 45\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+},
+{
+    "task_id": 6,
+    "type": "O0",
+    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int num = 12345, reversed = 0, remainder;\n    while (num != 0) {\n        remainder = num % 10;\n        reversed = reversed * 10 + remainder;\n        num /= 10;\n    }\n    printf(\"Reversed Number: %d\", reversed);\n}",
+    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Reversed Number: 54321\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+},
+{
+    "task_id": 7,
+    "type": "O0",
+    "c_func": "#include <stdio.h>\n#include <string.h>\n\nvoid func0() {\n    char str[] = \"Hello World\";\n    int count = 0;\n    for (int i = 0; i < strlen(str); i++) {\n        if (strchr(\"AEIOUaeiou\", str[i])) {\n            count++;\n        }\n    }\n    printf(\"Vowel Count: %d\", count);\n}",
+    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Vowel Count: 3\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+},
+{
+    "task_id": 8,
+    "type": "O0",
+    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int num = 29, isPrime = 1;\n    for (int i = 2; i * i <= num; i++) {\n        if (num % i == 0) {\n            isPrime = 0;\n            break;\n        }\n    }\n    if (isPrime) printf(\"Prime Number\"); else printf(\"Not a Prime Number\");\n}",
+    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Prime Number\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+},
+{
+    "task_id": 9,
+    "type": "O0",
+    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int num = 54321, sum = 0;\n    while (num > 0) {\n        sum += num % 10;\n        num /= 10;\n    }\n    printf(\"Sum of Digits: %d\", sum);\n}",
+    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Sum of Digits: 15\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+},
+{
+    "task_id": 10,
+    "type": "O0",
+    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int num = 5, fact = 1;\n    for (int i = 1; i <= num; i++) {\n        fact *= i;\n    }\n    printf(\"Factorial: %d\", fact);\n}",
+    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Factorial: 120\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
 }
+
+
+
 ]
