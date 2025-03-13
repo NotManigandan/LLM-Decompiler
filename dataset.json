@@ -1,307 +1,309 @@
-[{
-    "task_id": 1,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0(int *a, int *b) {\n    int temp = *a;\n    *a = *b;\n    *b = temp;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0(int *a, int *b);\n\nint main(){\n    int x = 5, y = 10;\n    func0(&x, &y);\n    assert(x == 10 && y == 5);\n\n    x = -1, y = 100;\n    func0(&x, &y);\n    assert(x == 100 && y == -1);\n\n    x = 0, y = 0;\n    func0(&x, &y);\n    assert(x == 0 && y == 0);\n\n    x = 2147483647, y = -2147483648;\n    func0(&x, &y);\n    assert(x == -2147483648 && y == 2147483647);\n\n    printf(\"All test cases passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 2,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int arr1[5][5] = { { 0, 1, 2, 3, 4 },\n                        { 2, 3, 4, 5, 6 },\n                        { 4, 5, 6, 7, 8 },\n                        { 5, 4, 3, 2, 6 },\n                        { 2, 5, 4, 3, 1 } };\n    int* arr2[5][5];\n\n    for (int i = 0; i < 5; i++) {\n        for (int j = 0; j < 5; j++) {\n            arr2[i][j] = &arr1[i][j];\n        }\n    }\n\n    printf(\"The values are\\n\");\n    for (int i = 0; i < 5; i++) {\n        for (int j = 0; j < 5; j++) {\n            printf(\"%d \", *arr2[i][j]);\n        }\n        printf(\"\\n\");\n    }\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    func0();\n    printf(\"Function executed successfully.\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 3,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nstruct Student {\n    char* name;\n    int roll_number;\n    int age;\n    double total_marks;\n};\n\nvoid func0() {\n    struct Student students[5];\n    int n = sizeof(students) / sizeof(struct Student);\n\n    students[0].roll_number = 1;\n    students[0].name = \"Geeks1\";\n    students[0].age = 12;\n    students[0].total_marks = 78.50;\n\n    students[1].roll_number = 5;\n    students[1].name = \"Geeks5\";\n    students[1].age = 10;\n    students[1].total_marks = 56.84;\n\n    students[2].roll_number = 2;\n    students[2].name = \"Geeks2\";\n    students[2].age = 11;\n    students[2].total_marks = 87.94;\n\n    students[3].roll_number = 4;\n    students[3].name = \"Geeks4\";\n    students[3].age = 12;\n    students[3].total_marks = 89.78;\n\n    students[4].roll_number = 3;\n    students[4].name = \"Geeks3\";\n    students[4].age = 13;\n    students[4].total_marks = 78.55;\n\n    printf(\"========================================\\n\");\n    printf(\"           Student Records              \\n\");\n    printf(\"========================================\\n\");\n    \n    for (int i = 0; i < n; i++) {\n        printf(\"\\nStudent %d:\\n\", i + 1);\n        printf(\"  Name        : %s\\n\", students[i].name);\n        printf(\"  Roll Number : %d\\n\", students[i].roll_number);\n        printf(\"  Age         : %d\\n\", students[i].age);\n        printf(\"  Total Marks : %.2f\\n\", students[i].total_marks);\n    }\n    \n    printf(\"========================================\\n\");\n}",
-    "c_test": "#include <stdio.h>\n\nvoid func0();\n\nint main() {\n    func0();\n    printf(\"Function executed successfully.\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 4,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <stdlib.h>\n\nvoid func0() {\n    FILE *fptr1, *fptr2;\n    char filename[100];\n    int c;\n\n    printf(\"Enter the filename to open for reading: \");\n    scanf(\"%s\", filename);\n\n    fptr1 = fopen(filename, \"r\");\n    if (fptr1 == NULL) {\n        printf(\"Cannot open file %s\\n\", filename);\n        exit(1);\n    }\n\n    printf(\"Enter the filename to open for writing: \");\n    scanf(\"%s\", filename);\n\n    fptr2 = fopen(filename, \"w\");\n    if (fptr2 == NULL) {\n        printf(\"Cannot open file %s\\n\", filename);\n        exit(1);\n    }\n\n    while ((c = fgetc(fptr1)) != EOF) {\n        fputc(c, fptr2);\n    }\n\n    printf(\"Contents copied to %s\\n\", filename);\n\n    fclose(fptr1);\n    fclose(fptr2);\n}",
-    "c_test": "#include <stdio.h>\n#include <stdlib.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    FILE *testFile = fopen(\"test_input.txt\", \"w\");\n    fprintf(testFile, \"Hello, World!\\n\");\n    fclose(testFile);\n\n    freopen(\"test_input.txt\", \"r\", stdin);\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n\n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strcmp(buffer, \"Hello, World!\\n\") == 0);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 5,
-    "type": "O0",
-    "c_func": "#include <math.h>\n#include <stdio.h>\n#include <string.h>\n\nvoid func0() {\n    char hexdecnumber[32] = \"2D\";\n    int decimalnumber, i;\n    int cnt;\n    int digit;\n\n    cnt = 0;\n    decimalnumber = 0;\n    \n    for (i = (strlen(hexdecnumber) - 1); i >= 0; i--) {\n        switch (hexdecnumber[i]) {\n        case 'A': digit = 10; break;\n        case 'B': digit = 11; break;\n        case 'C': digit = 12; break;\n        case 'D': digit = 13; break;\n        case 'E': digit = 14; break;\n        case 'F': digit = 15; break;\n        default: digit = hexdecnumber[i] - 0x30;\n        }\n        \n        decimalnumber = decimalnumber + (digit) * pow((double)16, (double)cnt);\n        cnt++;\n    }\n    printf(\"Decimal number is: %d\", decimalnumber);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Decimal number is: 45\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 6,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int num = 12345, reversed = 0, remainder;\n    while (num != 0) {\n        remainder = num % 10;\n        reversed = reversed * 10 + remainder;\n        num /= 10;\n    }\n    printf(\"Reversed Number: %d\", reversed);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Reversed Number: 54321\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 7,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <string.h>\n\nvoid func0() {\n    char str[] = \"Hello World\";\n    int count = 0;\n    for (int i = 0; i < strlen(str); i++) {\n        if (strchr(\"AEIOUaeiou\", str[i])) {\n            count++;\n        }\n    }\n    printf(\"Vowel Count: %d\", count);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Vowel Count: 3\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 8,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int num = 29, isPrime = 1;\n    for (int i = 2; i * i <= num; i++) {\n        if (num % i == 0) {\n            isPrime = 0;\n            break;\n        }\n    }\n    if (isPrime) printf(\"Prime Number\"); else printf(\"Not a Prime Number\");\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Prime Number\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 9,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int num = 54321, sum = 0;\n    while (num > 0) {\n        sum += num % 10;\n        num /= 10;\n    }\n    printf(\"Sum of Digits: %d\", sum);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Sum of Digits: 15\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 10,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int num = 5, fact = 1;\n    for (int i = 1; i <= num; i++) {\n        fact *= i;\n    }\n    printf(\"Factorial: %d\", fact);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Factorial: 120\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 11,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int n = 10, t1 = 0, t2 = 1, nextTerm;\n    printf(\"Fibonacci Series: %d %d \", t1, t2);\n    for (int i = 3; i <= n; i++) {\n        nextTerm = t1 + t2;\n        printf(\"%d \", nextTerm);\n        t1 = t2;\n        t2 = nextTerm;\n    }\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Fibonacci Series: 0 1 1 2 3 5 8 13 21 34\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 12,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int arr[] = {1, 9, 3, 7, 5};\n    int max = arr[0];\n    for (int i = 1; i < 5; i++) {\n        if (arr[i] > max) max = arr[i];\n    }\n    printf(\"Max Value: %d\", max);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Max Value: 9\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 13,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <string.h>\n\nvoid func0() {\n    char str[] = \"Hello world! Welcome to C programming.\";\n    int count = 0;\n    for (int i = 0; str[i] != '\\0'; i++) {\n        if (str[i] == ' ' || str[i] == '\\n' || str[i] == '\\t')\n            count++;\n    }\n    printf(\"Word Count: %d\", count + 1);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Word Count: 6\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 14,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <string.h>\n\nvoid func0() {\n    char str[] = \"Hello\";\n    int n = strlen(str);\n    for (int i = 0; i < n / 2; i++) {\n        char temp = str[i];\n        str[i] = str[n - i - 1];\n        str[n - i - 1] = temp;\n    }\n    printf(\"Reversed String: %s\", str);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Reversed String: olleH\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 15,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int num = 10;\n    if (num % 2 == 0)\n        printf(\"Even Number\");\n    else\n        printf(\"Odd Number\");\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    \n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    \n    assert(strstr(buffer, \"Even Number\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 16,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int a = 56, b = 98, gcd;\n    for (int i = 1; i <= a && i <= b; i++) {\n        if (a % i == 0 && b % i == 0)\n            gcd = i;\n    }\n    printf(\"GCD: %d\", gcd);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    assert(strstr(buffer, \"GCD: 14\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 17,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int num = 121, reversed = 0, original = num, remainder;\n    while (num != 0) {\n        remainder = num % 10;\n        reversed = reversed * 10 + remainder;\n        num /= 10;\n    }\n    if (original == reversed)\n        printf(\"Palindrome Number\");\n    else\n        printf(\"Not a Palindrome\");\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    assert(strstr(buffer, \"Palindrome Number\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 18,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    float celsius = 37.0;\n    float fahrenheit = (celsius * 9/5) + 32;\n    printf(\"Fahrenheit: %.2f\", fahrenheit);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    assert(strstr(buffer, \"Fahrenheit: 98.60\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 19,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int n = 10, sum = 0;\n    for (int i = 1; i <= n; i++) {\n        sum += i;\n    }\n    printf(\"Sum: %d\", sum);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    assert(strstr(buffer, \"Sum: 55\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 20,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int a = 5, b = 10;\n    a = a + b;\n    b = a - b;\n    a = a - b;\n    printf(\"Swapped: a=%d, b=%d\", a, b);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    assert(strstr(buffer, \"Swapped: a=10, b=5\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 21,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int a = 12, b = 18, lcm;\n    int max = (a > b) ? a : b;\n    while (1) {\n        if (max % a == 0 && max % b == 0) {\n            lcm = max;\n            break;\n        }\n        max++;\n    }\n    printf(\"LCM: %d\", lcm);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    assert(strstr(buffer, \"LCM: 36\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 22,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    char ch = 'e';\n    if (ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U' ||\n        ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {\n        printf(\"Vowel\");\n    } else {\n        printf(\"Consonant\");\n    }\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    assert(strstr(buffer, \"Vowel\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 23,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <math.h>\n\nvoid func0() {\n    int binary = 1011, decimal = 0, i = 0;\n    while (binary != 0) {\n        decimal += (binary % 10) * pow(2, i);\n        binary /= 10;\n        i++;\n    }\n    printf(\"Decimal: %d\", decimal);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    assert(strstr(buffer, \"Decimal: 11\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 24,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nvoid func0() {\n    int arr[] = {1, 2, 3, 4, 5};\n    int n = 5;\n    for (int i = 0; i < n / 2; i++) {\n        int temp = arr[i];\n        arr[i] = arr[n - i - 1];\n        arr[n - i - 1] = temp;\n    }\n    printf(\"Reversed array: \");\n    for (int i = 0; i < n; i++) {\n        printf(\"%d \", arr[i]);\n    }\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0();\n\nint main() {\n    freopen(\"test_output.txt\", \"w\", stdout);\n    func0();\n    fclose(stdout);\n    FILE *outputFile = fopen(\"test_output.txt\", \"r\");\n    char buffer[100];\n    fgets(buffer, 100, outputFile);\n    fclose(outputFile);\n    assert(strstr(buffer, \"Reversed array: 5 4 3 2 1\") != NULL);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 25,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nstruct Result {\n    int evenSum;\n    int oddSum;\n};\n\nstruct Result func0() {\n    int arr[] = {1, 2, 3, 4, 5, 6};\n    struct Result res = {0, 0};\n    \n    for (int i = 0; i < 6; i++) {\n        if (arr[i] % 2 == 0) res.evenSum += arr[i];\n        else res.oddSum += arr[i];\n    }\n    \n    return res;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nstruct Result {\n    int evenSum;\n    int oddSum;\n};\n\nstruct Result func0();\n\nint main() {\n    struct Result result = func0();\n    assert(result.evenSum == 12 && result.oddSum == 9);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 26,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <math.h>\n\nint func0() {\n    int num = 153, sum = 0, temp = num;\n    while (temp > 0) {\n        int digit = temp % 10;\n        sum += pow(digit, 3);\n        temp /= 10;\n    }\n    return (sum == num) ? 1 : 0; // 1 if Armstrong, 0 if not\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 1);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 27,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#define PI 3.14159\n\nfloat func0() {\n    float radius = 5.0;\n    float area = PI * radius * radius;\n    return area;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n#include <math.h>\n\nfloat func0();\n\nint main() {\n    float result = func0();\n    assert(fabs(result - 78.54) < 0.01);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 28,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <stdlib.h>\n\nint* func0() {\n    static int arr[] = {5, 3, 8, 1, 2};\n    int n = 5, temp;\n    \n    for (int i = 0; i < n - 1; i++) {\n        for (int j = 0; j < n - i - 1; j++) {\n            if (arr[j] > arr[j + 1]) {\n                temp = arr[j];\n                arr[j] = arr[j + 1];\n                arr[j + 1] = temp;\n            }\n        }\n    }\n    \n    return arr;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint* func0();\n\nint main() {\n    int* result = func0();\n    assert(result[0] == 1 && result[1] == 2 && result[2] == 3 && result[3] == 5 && result[4] == 8);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 29,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <string.h>\n\nint func0() {\n    char str1[] = \"listen\", str2[] = \"silent\";\n    int count1[26] = {0}, count2[26] = {0};\n    \n    // First check if lengths are equal\n    if (strlen(str1) != strlen(str2)) {\n        return 0; // Not anagrams if different lengths\n    }\n    \n    for (int i = 0; str1[i]; i++) {\n        count1[str1[i] - 'a']++;\n    }\n    \n    for (int i = 0; str2[i]; i++) {\n        count2[str2[i] - 'a']++;\n    }\n    \n    return (memcmp(count1, count2, sizeof(count1)) == 0) ? 1 : 0; // 1 if anagram, 0 if not\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 1);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-{
-    "task_id": 30,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <string.h>\n\nchar func0() {\n    char str[] = \"swiss\";\n    int freq[256] = {0};\n    for (int i = 0; str[i]; i++) {\n        freq[str[i]]++;\n        if (freq[str[i]] > 1) {\n            return str[i];\n        }\n    }\n    return '\\0'; // No repeating character found\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nchar func0();\n\nint main() {\n    char result = func0();\n    assert(result == 's');\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-},
-  {
-    "task_id": 31,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nint func0() {\n    int year = 2024;\n    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))\n        return 1; // Is a leap year\n    else\n        return 0; // Not a leap year\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 1);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 32,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 12345, count = 0;\n    while (num != 0) {\n        num /= 10;\n        count++;\n    }\n    return count;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 5);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 33,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 28, sum = 0;\n    for (int i = 1; i < num; i++) {\n        if (num % i == 0) sum += i;\n    }\n    return (sum == num) ? 1 : 0; // 1 if perfect, 0 if not\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 1);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 34,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <ctype.h>\n#include <string.h>\n\nchar* func0() {\n    static char str[] = \"hello world\";\n    for (int i = 0; str[i] != '\\0'; i++) {\n        if (str[i] >= 'a' && str[i] <= 'z')\n            str[i] = str[i] - ('a' - 'A');\n    }\n    return str;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n#include <string.h>\n\nchar* func0();\n\nint main() {\n    char* result = func0();\n    assert(strcmp(result, \"HELLO WORLD\") == 0);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 35,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <stdlib.h>\n\nint** func0() {\n    int A[2][2] = {{1, 2}, {3, 4}}, B[2][2] = {{5, 6}, {7, 8}};\n    static int C[2][2];\n    \n    for (int i = 0; i < 2; i++) {\n        for (int j = 0; j < 2; j++) {\n            C[i][j] = A[i][j] + B[i][j];\n        }\n    }\n    \n    static int* result[2];\n    result[0] = C[0];\n    result[1] = C[1];\n    \n    return result;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint** func0();\n\nint main() {\n    int** result = func0();\n    assert(result[0][0] == 6 && result[0][1] == 8);\n    assert(result[1][0] == 10 && result[1][1] == 12);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 36,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <string.h>\n\nint func0() {\n    char str[] = \"racecar\";\n    int len = strlen(str);\n    int isPalindrome = 1;\n    for (int i = 0; i < len / 2; i++) {\n        if (str[i] != str[len - i - 1]) {\n            isPalindrome = 0;\n            break;\n        }\n    }\n    return isPalindrome;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 1);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 37,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nint func0() {\n    int n = 10, sum = 0;\n    for (int i = 1; i <= n; i++) {\n        sum += i;\n    }\n    return sum;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 55);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 38,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nint func0() {\n    int arr[] = {3, 5, 7, 2, 8};\n    int max = arr[0];\n    for (int i = 1; i < 5; i++) {\n        if (arr[i] > max) max = arr[i];\n    }\n    return max;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 8);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 39,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 54321, reversed = 0;\n    while (num != 0) {\n        reversed = reversed * 10 + num % 10;\n        num /= 10;\n    }\n    return reversed;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 12345);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 40,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nint func0() {\n    int arr[] = {3, 5, 7, 2, 8};\n    int max = arr[0], secondMax = arr[1];\n    if (max < secondMax) {\n        int temp = max;\n        max = secondMax;\n        secondMax = temp;\n    }\n    for (int i = 2; i < 5; i++) {\n        if (arr[i] > max) {\n            secondMax = max;\n            max = arr[i];\n        } else if (arr[i] > secondMax && arr[i] != max) {\n            secondMax = arr[i];\n        }\n    }\n    return secondMax;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 7);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 41,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 4, square = num * num;\n    return square;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 16);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 42,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 8, cube = num * num * num;\n    return cube;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 512);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 43,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n\nint func0() {\n    int a = 7, b = 9;\n    return a + b;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 16);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 44,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <math.h>\n\ndouble func0() {\n    double num = 16.0;\n    return sqrt(num);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n#include <math.h>\n\ndouble func0();\n\nint main() {\n    double result = func0();\n    assert(fabs(result - 4.0) < 0.001);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 45,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#define PI 3.14159\n\nfloat func0() {\n    float radius = 3.0;\n    float circumference = 2 * PI * radius;\n    return circumference;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n#include <math.h>\n\nfloat func0();\n\nint main() {\n    float result = func0();\n    assert(fabs(result - 18.85) < 0.01);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 46,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <stdlib.h>\n\nint** func0() {\n    int A[2][2] = {{9, 8}, {7, 6}}, B[2][2] = {{5, 4}, {3, 2}};\n    static int C[2][2];\n    \n    for (int i = 0; i < 2; i++) {\n        for (int j = 0; j < 2; j++) {\n            C[i][j] = A[i][j] - B[i][j];\n        }\n    }\n    \n    static int* result[2];\n    result[0] = C[0];\n    result[1] = C[1];\n    \n    return result;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint** func0();\n\nint main() {\n    int** result = func0();\n    assert(result[0][0] == 4 && result[0][1] == 4);\n    assert(result[1][0] == 4 && result[1][1] == 4);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 47,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <ctype.h>\n\nchar func0() {\n    char ch = 'G';\n    return tolower(ch);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nchar func0();\n\nint main() {\n    char result = func0();\n    assert(result == 'g');\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 48,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <math.h>\n\ndouble func0() {\n    double base = 2.0, exponent = 5.0;\n    return pow(base, exponent);\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n#include <math.h>\n\ndouble func0();\n\nint main() {\n    double result = func0();\n    assert(fabs(result - 32.0) < 0.001);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 49,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <string.h>\n\nchar* func0() {\n    static char str1[20] = \"Good\";\n    char str2[] = \"Morning\";\n    strcat(str1, str2);\n    return str1;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n#include <string.h>\n\nchar* func0();\n\nint main() {\n    char* result = func0();\n    assert(strcmp(result, \"GoodMorning\") == 0);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 50,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <stdlib.h>\n\nint** func0() {\n    int A[2][2] = {{1, 2}, {3, 4}}, B[2][2] = {{5, 6}, {7, 8}};\n    static int C[2][2] = {0};\n    \n    for (int i = 0; i < 2; i++) {\n        for (int j = 0; j < 2; j++) {\n            for (int k = 0; k < 2; k++) {\n                C[i][j] += A[i][k] * B[k][j];\n            }\n        }\n    }\n    \n    static int* result[2];\n    result[0] = C[0];\n    result[1] = C[1];\n    \n    return result;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint** func0();\n\nint main() {\n    int** result = func0();\n    assert(result[0][0] == 19 && result[0][1] == 22);\n    assert(result[1][0] == 43 && result[1][1] == 50);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  },
-  {
-    "task_id": 51,
-    "type": "O0",
-    "c_func": "#include <stdio.h>\n#include <stdlib.h>\n\nint** func0() {\n    int A[2][2] = {{1, 2}, {3, 4}};\n    static int T[2][2];\n    \n    for (int i = 0; i < 2; i++) {\n        for (int j = 0; j < 2; j++) {\n            T[j][i] = A[i][j];\n        }\n    }\n    \n    static int* result[2];\n    result[0] = T[0];\n    result[1] = T[1];\n    \n    return result;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint** func0();\n\nint main() {\n    int** result = func0();\n    assert(result[0][0] == 1 && result[0][1] == 3);\n    assert(result[1][0] == 2 && result[1][1] == 4);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
-  }
+[
+    {
+        "task_id": 1,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0(int *a, int *b) {\n    int temp = *a;\n    *a = *b;\n    *b = temp;\n    return 0;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0(int *a, int *b);\n\nint main(){\n    int x = 5, y = 10;\n    func0(&x, &y);\n    assert(x == 10 && y == 5);\n\n    x = -1, y = 100;\n    func0(&x, &y);\n    assert(x == 100 && y == -1);\n\n    x = 0, y = 0;\n    func0(&x, &y);\n    assert(x == 0 && y == 0);\n\n    x = 2147483647, y = -2147483648;\n    func0(&x, &y);\n    assert(x == -2147483648 && y == 2147483647);\n\n    return 0;\n}"
+    },
+    {
+        "task_id": 2,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int arr1[2][2] = {{1, 2}, {3, 4}};\n    int arr2[2][2];\n    for (int i = 0; i < 2; i++) {\n        for (int j = 0; j < 2; j++) {\n            arr2[i][j] = arr1[i][j];\n        }\n    }\n    return arr2[1][1];\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 4);\n    return 0;\n}"
+    },
+    {
+        "task_id": 3,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 12345, reversed = 0, remainder;\n    while (num != 0) {\n        remainder = num % 10;\n        reversed = reversed * 10 + remainder;\n        num /= 10;\n    }\n    return reversed;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 54321);\n    return 0;\n}"
+    },
+    {
+        "task_id": 4,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int arr[] = {3, 5, 7, 2, 8};\n    int max = arr[0];\n    for (int i = 1; i < 5; i++) {\n        if (arr[i] > max) max = arr[i];\n    }\n    return max;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 8);\n    return 0;\n}"
+    },
+    {
+        "task_id": 5,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 28, sum = 0;\n    for (int i = 1; i < num; i++) {\n        if (num % i == 0) sum += i;\n    }\n    return sum == num;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 1);\n    return 0;\n}"
+    },
+    {
+        "task_id": 6,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 12345, reversed = 0, remainder;\n    while (num != 0) {\n        remainder = num % 10;\n        reversed = reversed * 10 + remainder;\n        num /= 10;\n    }\n    return reversed;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 54321);\n    return 0;\n}"
+    },
+    {
+        "task_id": 7,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <string.h>\n\nint func0() {\n    char str[] = \"Hello World\";\n    int count = 0;\n    for (int i = 0; i < strlen(str); i++) {\n        if (strchr(\"AEIOUaeiou\", str[i])) {\n            count++;\n        }\n    }\n    return count;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 3);\n    return 0;\n}"
+    },
+    {
+        "task_id": 8,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 29, isPrime = 1;\n    for (int i = 2; i * i <= num; i++) {\n        if (num % i == 0) {\n            isPrime = 0;\n            break;\n        }\n    }\n    return isPrime;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 1);\n    return 0;\n}"
+    },
+    {
+        "task_id": 9,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 54321, sum = 0;\n    while (num > 0) {\n        sum += num % 10;\n        num /= 10;\n    }\n    return sum;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 15);\n    return 0;\n}"
+    },
+    {
+        "task_id": 10,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 5, fact = 1;\n    for (int i = 1; i <= num; i++) {\n        fact *= i;\n    }\n    return fact;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 120);\n    return 0;\n}"
+    },
+    {
+        "task_id": 11,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nvoid func0(int fibo[]) {\n    int n = 10, t1 = 0, t2 = 1, nextTerm;\n    fibo[0] = t1;\n    fibo[1] = t2;\n    for (int i = 2; i < n; i++) {\n        nextTerm = t1 + t2;\n        fibo[i] = nextTerm;\n        t1 = t2;\n        t2 = nextTerm;\n    }\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0(int fibo[]);\n\nint main() {\n    int fibo[10];\n    func0(fibo);\n    int expected[] = {0, 1, 1, 2, 3, 5, 8, 13, 21, 34};\n    for (int i = 0; i < 10; i++) {\n        assert(fibo[i] == expected[i]);\n    }\n    return 0;\n}"
+    },
+    {
+        "task_id": 12,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int arr[] = {1, 9, 3, 7, 5};\n    int max = arr[0];\n    for (int i = 1; i < 5; i++) {\n        if (arr[i] > max) max = arr[i];\n    }\n    return max;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 9);\n    return 0;\n}"
+    },
+    {
+        "task_id": 13,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <string.h>\n\nint func0() {\n    char str[] = \"Hello world! Welcome to C programming.\";\n    int count = 0;\n    for (int i = 0; str[i] != '\\0'; i++) {\n        if (str[i] == ' ' || str[i] == '\\n' || str[i] == '\\t')\n            count++;\n    }\n    return count + 1;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 6);\n    return 0;\n}"
+    },
+    {
+        "task_id": 14,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <string.h>\n\nvoid func0(char str[]) {\n    int n = strlen(str);\n    for (int i = 0; i < n / 2; i++) {\n        char temp = str[i];\n        str[i] = str[n - i - 1];\n        str[n - i - 1] = temp;\n    }\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n#include <string.h>\n\nvoid func0(char str[]);\n\nint main() {\n    char str[] = \"Hello\";\n    func0(str);\n    assert(strcmp(str, \"olleH\") == 0);\n    return 0;\n}"
+    },
+    {
+        "task_id": 15,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0(int num) {\n    return (num % 2 == 0) ? 1 : 0;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0(int num);\n\nint main() {\n    assert(func0(10) == 1);\n    assert(func0(11) == 0);\n    return 0;\n}"
+    },
+    {
+        "task_id": 16,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0(int a, int b) {\n    int gcd;\n    for (int i = 1; i <= a && i <= b; i++) {\n        if (a % i == 0 && b % i == 0)\n            gcd = i;\n    }\n    return gcd;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0(int a, int b);\n\nint main() {\n    assert(func0(56, 98) == 14);\n    return 0;\n}"
+    },
+    {
+        "task_id": 17,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 121, reversed = 0, original = num, remainder;\n    while (num != 0) {\n        remainder = num % 10;\n        reversed = reversed * 10 + remainder;\n        num /= 10;\n    }\n    return original == reversed;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 1);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+    },
+    {
+        "task_id": 18,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nfloat func0() {\n    float celsius = 37.0;\n    return (celsius * 9/5) + 32;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nfloat func0();\n\nint main() {\n    assert(func0() == 98.6f);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+    },
+    {
+        "task_id": 19,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int n = 10, sum = 0;\n    for (int i = 1; i <= n; i++) {\n        sum += i;\n    }\n    return sum;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 55);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+    },
+    {
+        "task_id": 20,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nvoid func0(int *a, int *b) {\n    *a = *a + *b;\n    *b = *a - *b;\n    *a = *a - *b;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0(int *a, int *b);\n\nint main() {\n    int x = 5, y = 10;\n    func0(&x, &y);\n    assert(x == 10 && y == 5);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+    },
+    {
+        "task_id": 21,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int a = 12, b = 18, lcm;\n    int max = (a > b) ? a : b;\n    while (1) {\n        if (max % a == 0 && max % b == 0) {\n            lcm = max;\n            break;\n        }\n        max++;\n    }\n    return lcm;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 36);\n    return 0;\n}"
+    },
+    {
+        "task_id": 22,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nchar func0() {\n    char ch = 'e';\n    if (ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U' ||\n        ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {\n        return 'V';\n    } else {\n        return 'C';\n    }\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nchar func0();\n\nint main() {\n    assert(func0() == 'V');\n    return 0;\n}"
+    },
+    {
+        "task_id": 23,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <math.h>\n\nint func0() {\n    int binary = 1011, decimal = 0, i = 0;\n    while (binary != 0) {\n        decimal += (binary % 10) * pow(2, i);\n        binary /= 10;\n        i++;\n    }\n    return decimal;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    assert(func0() == 11);\n    return 0;\n}"
+    },
+    {
+        "task_id": 24,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nvoid func0(int arr[], int n) {\n    for (int i = 0; i < n / 2; i++) {\n        int temp = arr[i];\n        arr[i] = arr[n - i - 1];\n        arr[n - i - 1] = temp;\n    }\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0(int arr[], int n);\n\nint main() {\n    int arr[] = {1, 2, 3, 4, 5};\n    func0(arr, 5);\n    int expected[] = {5, 4, 3, 2, 1};\n    for (int i = 0; i < 5; i++) {\n        assert(arr[i] == expected[i]);\n    }\n    return 0;\n}"
+    },
+    {
+        "task_id": 25,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nstruct Result {\n    int evenSum;\n    int oddSum;\n};\n\nstruct Result func0() {\n    int arr[] = {1, 2, 3, 4, 5, 6};\n    struct Result res = {0, 0};\n    \n    for (int i = 0; i < 6; i++) {\n        if (arr[i] % 2 == 0) res.evenSum += arr[i];\n        else res.oddSum += arr[i];\n    }\n    \n    return res;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nstruct Result {\n    int evenSum;\n    int oddSum;\n};\n\nstruct Result func0();\n\nint main() {\n    struct Result result = func0();\n    assert(result.evenSum == 12 && result.oddSum == 9);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 26,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <math.h>\n\nint func0() {\n    int num = 153, sum = 0, temp = num;\n    while (temp > 0) {\n        int digit = temp % 10;\n        sum += pow(digit, 3);\n        temp /= 10;\n    }\n    return (sum == num) ? 1 : 0; // 1 if Armstrong, 0 if not\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 1);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 27,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#define PI 3.14159\n\nfloat func0() {\n    float radius = 5.0;\n    float area = PI * radius * radius;\n    return area;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n#include <math.h>\n\nfloat func0();\n\nint main() {\n    float result = func0();\n    assert(fabs(result - 78.54) < 0.01);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 28,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <stdlib.h>\n\nint* func0() {\n    static int arr[] = {5, 3, 8, 1, 2};\n    int n = 5, temp;\n    \n    for (int i = 0; i < n - 1; i++) {\n        for (int j = 0; j < n - i - 1; j++) {\n            if (arr[j] > arr[j + 1]) {\n                temp = arr[j];\n                arr[j] = arr[j + 1];\n                arr[j + 1] = temp;\n            }\n        }\n    }\n    \n    return arr;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint* func0();\n\nint main() {\n    int* result = func0();\n    assert(result[0] == 1 && result[1] == 2 && result[2] == 3 && result[3] == 5 && result[4] == 8);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 29,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <string.h>\n\nint func0() {\n    char str1[] = \"listen\", str2[] = \"silent\";\n    int count1[26] = {0}, count2[26] = {0};\n    \n    // First check if lengths are equal\n    if (strlen(str1) != strlen(str2)) {\n        return 0; // Not anagrams if different lengths\n    }\n    \n    for (int i = 0; str1[i]; i++) {\n        count1[str1[i] - 'a']++;\n    }\n    \n    for (int i = 0; str2[i]; i++) {\n        count2[str2[i] - 'a']++;\n    }\n    \n    return (memcmp(count1, count2, sizeof(count1)) == 0) ? 1 : 0; // 1 if anagram, 0 if not\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 1);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+    },
+    {
+        "task_id": 30,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <string.h>\n\nchar func0() {\n    char str[] = \"swiss\";\n    int freq[256] = {0};\n    for (int i = 0; str[i]; i++) {\n        freq[str[i]]++;\n        if (freq[str[i]] > 1) {\n            return str[i];\n        }\n    }\n    return '\\0'; // No repeating character found\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nchar func0();\n\nint main() {\n    char result = func0();\n    assert(result == 's');\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+    },
+      {
+        "task_id": 31,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int year = 2024;\n    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))\n        return 1; // Is a leap year\n    else\n        return 0; // Not a leap year\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 1);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 32,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 12345, count = 0;\n    while (num != 0) {\n        num /= 10;\n        count++;\n    }\n    return count;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 5);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 33,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 28, sum = 0;\n    for (int i = 1; i < num; i++) {\n        if (num % i == 0) sum += i;\n    }\n    return (sum == num) ? 1 : 0; // 1 if perfect, 0 if not\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 1);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 34,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <ctype.h>\n#include <string.h>\n\nchar* func0() {\n    static char str[] = \"hello world\";\n    for (int i = 0; str[i] != '\\0'; i++) {\n        if (str[i] >= 'a' && str[i] <= 'z')\n            str[i] = str[i] - ('a' - 'A');\n    }\n    return str;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n#include <string.h>\n\nchar* func0();\n\nint main() {\n    char* result = func0();\n    assert(strcmp(result, \"HELLO WORLD\") == 0);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 35,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <stdlib.h>\n\nint** func0() {\n    int A[2][2] = {{1, 2}, {3, 4}}, B[2][2] = {{5, 6}, {7, 8}};\n    static int C[2][2];\n    \n    for (int i = 0; i < 2; i++) {\n        for (int j = 0; j < 2; j++) {\n            C[i][j] = A[i][j] + B[i][j];\n        }\n    }\n    \n    static int* result[2];\n    result[0] = C[0];\n    result[1] = C[1];\n    \n    return result;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint** func0();\n\nint main() {\n    int** result = func0();\n    assert(result[0][0] == 6 && result[0][1] == 8);\n    assert(result[1][0] == 10 && result[1][1] == 12);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 36,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <string.h>\n\nint func0() {\n    char str[] = \"racecar\";\n    int len = strlen(str);\n    int isPalindrome = 1;\n    for (int i = 0; i < len / 2; i++) {\n        if (str[i] != str[len - i - 1]) {\n            isPalindrome = 0;\n            break;\n        }\n    }\n    return isPalindrome;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 1);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 37,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int n = 10, sum = 0;\n    for (int i = 1; i <= n; i++) {\n        sum += i;\n    }\n    return sum;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 55);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 38,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int arr[] = {3, 5, 7, 2, 8};\n    int max = arr[0];\n    for (int i = 1; i < 5; i++) {\n        if (arr[i] > max) max = arr[i];\n    }\n    return max;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 8);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 39,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 54321, reversed = 0;\n    while (num != 0) {\n        reversed = reversed * 10 + num % 10;\n        num /= 10;\n    }\n    return reversed;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 12345);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 40,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int arr[] = {3, 5, 7, 2, 8};\n    int max = arr[0], secondMax = arr[1];\n    if (max < secondMax) {\n        int temp = max;\n        max = secondMax;\n        secondMax = temp;\n    }\n    for (int i = 2; i < 5; i++) {\n        if (arr[i] > max) {\n            secondMax = max;\n            max = arr[i];\n        } else if (arr[i] > secondMax && arr[i] != max) {\n            secondMax = arr[i];\n        }\n    }\n    return secondMax;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 7);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 41,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 4, square = num * num;\n    return square;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 16);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 42,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int num = 8, cube = num * num * num;\n    return cube;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 512);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 43,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n\nint func0() {\n    int a = 7, b = 9;\n    return a + b;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint func0();\n\nint main() {\n    int result = func0();\n    assert(result == 16);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 44,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <math.h>\n\ndouble func0() {\n    double num = 16.0;\n    return sqrt(num);\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n#include <math.h>\n\ndouble func0();\n\nint main() {\n    double result = func0();\n    assert(fabs(result - 4.0) < 0.001);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 45,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#define PI 3.14159\n\nfloat func0() {\n    float radius = 3.0;\n    float circumference = 2 * PI * radius;\n    return circumference;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n#include <math.h>\n\nfloat func0();\n\nint main() {\n    float result = func0();\n    assert(fabs(result - 18.85) < 0.01);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 46,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <stdlib.h>\n\nint** func0() {\n    int A[2][2] = {{9, 8}, {7, 6}}, B[2][2] = {{5, 4}, {3, 2}};\n    static int C[2][2];\n    \n    for (int i = 0; i < 2; i++) {\n        for (int j = 0; j < 2; j++) {\n            C[i][j] = A[i][j] - B[i][j];\n        }\n    }\n    \n    static int* result[2];\n    result[0] = C[0];\n    result[1] = C[1];\n    \n    return result;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint** func0();\n\nint main() {\n    int** result = func0();\n    assert(result[0][0] == 4 && result[0][1] == 4);\n    assert(result[1][0] == 4 && result[1][1] == 4);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 47,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <ctype.h>\n\nchar func0() {\n    char ch = 'G';\n    return tolower(ch);\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nchar func0();\n\nint main() {\n    char result = func0();\n    assert(result == 'g');\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 48,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <math.h>\n\ndouble func0() {\n    double base = 2.0, exponent = 5.0;\n    return pow(base, exponent);\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n#include <math.h>\n\ndouble func0();\n\nint main() {\n    double result = func0();\n    assert(fabs(result - 32.0) < 0.001);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 49,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <string.h>\n\nchar* func0() {\n    static char str1[20] = \"Good\";\n    char str2[] = \"Morning\";\n    strcat(str1, str2);\n    return str1;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n#include <string.h>\n\nchar* func0();\n\nint main() {\n    char* result = func0();\n    assert(strcmp(result, \"GoodMorning\") == 0);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 50,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <stdlib.h>\n\nint** func0() {\n    int A[2][2] = {{1, 2}, {3, 4}}, B[2][2] = {{5, 6}, {7, 8}};\n    static int C[2][2] = {0};\n    \n    for (int i = 0; i < 2; i++) {\n        for (int j = 0; j < 2; j++) {\n            for (int k = 0; k < 2; k++) {\n                C[i][j] += A[i][k] * B[k][j];\n            }\n        }\n    }\n    \n    static int* result[2];\n    result[0] = C[0];\n    result[1] = C[1];\n    \n    return result;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint** func0();\n\nint main() {\n    int** result = func0();\n    assert(result[0][0] == 19 && result[0][1] == 22);\n    assert(result[1][0] == 43 && result[1][1] == 50);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      },
+      {
+        "task_id": 51,
+        "type": "O0",
+        "c_func": "#include <stdio.h>\n#include <stdlib.h>\n\nint** func0() {\n    int A[2][2] = {{1, 2}, {3, 4}};\n    static int T[2][2];\n    \n    for (int i = 0; i < 2; i++) {\n        for (int j = 0; j < 2; j++) {\n            T[j][i] = A[i][j];\n        }\n    }\n    \n    static int* result[2];\n    result[0] = T[0];\n    result[1] = T[1];\n    \n    return result;\n}",
+        "c_test": "#include <stdio.h>\n#include <assert.h>\n\nint** func0();\n\nint main() {\n    int** result = func0();\n    assert(result[0][0] == 1 && result[0][1] == 3);\n    assert(result[1][0] == 2 && result[1][1] == 4);\n    printf(\"Test passed!\\n\");\n    return 0;\n}"
+      }
+
 ]
