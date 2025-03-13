@@ -2,7 +2,7 @@
     "task_id": 1,
     "type": "O0",
     "c_func": "#include <stdio.h>\n\nvoid func0(int *a, int *b) {\n    int temp = *a;\n    *a = *b;\n    *b = temp;\n}",
-    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0(int *a, int *b);\n\nint main(){\n    int x = 5, y = 10;\n    func0(&x, &y);\n    assert(x == 10 && y == 5);\n\n    x = -1, y = 100;\n    func0(&x, &y);\n    assert(x == 100 && y == -1);\n\n    x = 0, y = 0;\n    func0(&x, &y);\n    assert(x == 0 && y == 0);\n\n    x = 2147483647, y = -2147483648;\n    func0(&x, &y);\n    assert(x == -2147483648 && y == 2147483647);\n\n    printf(\"All test cases passed!\\n\");\n    return 0;\n}",
+    "c_test": "#include <stdio.h>\n#include <assert.h>\n\nvoid func0(int *a, int *b);\n\nint main(){\n    int x = 5, y = 10;\n    func0(&x, &y);\n    assert(x == 10 && y == 5);\n\n    x = -1, y = 100;\n    func0(&x, &y);\n    assert(x == 100 && y == -1);\n\n    x = 0, y = 0;\n    func0(&x, &y);\n    assert(x == 0 && y == 0);\n\n    x = 2147483647, y = -2147483648;\n    func0(&x, &y);\n    assert(x == -2147483648 && y == 2147483647);\n\n    printf(\"All test cases passed!\\n\");\n    return 0;\n}"
 },
 {
     "task_id": 2,
